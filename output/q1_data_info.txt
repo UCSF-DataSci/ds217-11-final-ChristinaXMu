@@ -46,7 +46,7 @@ End: NaT
 
 Missing Values:
 - Station Name: 0 (0.0%)
-- Measurement Timestamp: 195892 (100.0%)
+- Measurement Timestamp: 0 (0.0%)
 - Air Temperature: 75 (0.0%)
 - Wet Bulb Temperature: 75736 (38.7%)
 - Humidity: 0 (0.0%)
