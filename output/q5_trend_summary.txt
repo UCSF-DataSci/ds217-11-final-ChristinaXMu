@@ -1,0 +1,33 @@
+KEY PATTERNS IDENTIFIED
+============================================================
+
+TEMPORAL TRENDS:
+- Primary variable analyzed: Air Temperature
+- Overall mean: 12.65
+- Overall std: 10.43
+- Overall range: [-29.78, 37.60]
+- Monthly range: [-2.55, 23.59]
+- Peak month: July
+- Lowest month: January
+
+DAILY PATTERNS:
+- Air Temperature shows diurnal cycle
+- Peak hour: 16:00 (14.07)
+- Minimum hour: 6:00 (11.02)
+- Daily temperature range: 3.05
+
+CORRELATIONS:
+Top positive correlations:
+  1. Barometric Pressure vs pressure_deviation: 1.000
+  2. Humidity vs humidity_squared: 0.990
+  3. Air Temperature vs Wet Bulb Temperature: 0.981
+
+Top negative correlations:
+  1. comfort_index vs humidity_rolling_7h: -0.660
+  2. comfort_index vs humidity_squared: -0.701
+  3. Humidity vs comfort_index: -0.714
+
+KEY INSIGHTS:
+- Air Temperature peaks in summer months
+- Air Temperature peaks in afternoon hours
+- Strong positive correlation detected between key variables
