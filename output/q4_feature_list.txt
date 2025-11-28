@@ -1,0 +1,16 @@
+wind_speed_squared
+wind_category
+comfort_index
+humidity_squared
+temp_wind_interaction
+pressure_deviation
+wind_speed_rolling_7h
+wind_speed_rolling_24h
+wind_speed_rolling_std_7h
+humidity_rolling_7h
+humidity_rolling_24h
+pressure_rolling_7h
+pressure_rolling_24h
+temp_category
+time_of_day
+season
