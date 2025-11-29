@@ -1,0 +1,47 @@
+TRAIN/TEST SPLIT INFORMATION
+============================================================
+
+Split Method: Temporal (80/20 split by time)
+Why temporal split? Time series has temporal dependencies.
+Random split would cause data leakage.
+
+Training Set Size: 96,064 samples
+Test Set Size: 24,017 samples
+
+Training Date Range: 2015-04-25 09:00:00 to 2022-11-30 20:00:00
+Training Duration: 2776 days
+
+Test Date Range: 2022-11-30 21:00:00 to 2025-11-24 12:00:00
+Test Duration: 1089 days
+
+Number of Features: 30
+Target Variable: Air Temperature
+
+Features Excluded (to prevent data leakage):
+  - temp_category
+  - temp_wind_interaction
+  - Air Temperature
+  - comfort_index
+
+Features Included:
+  - Wet Bulb Temperature
+  - Humidity
+  - Rain Intensity
+  - Interval Rain
+  - Total Rain
+  - Precipitation Type
+  - Wind Direction
+  - Wind Speed
+  - Maximum Wind Speed
+  - Barometric Pressure
+  - Solar Radiation
+  - Heading
+  - Battery Life
+  - hour
+  - day_of_week
+  - month
+  - year
+  - is_weekend
+  - day_of_month
+  - quarter
+  ... and 10 more features
