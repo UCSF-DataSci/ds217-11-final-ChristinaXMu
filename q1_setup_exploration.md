@@ -120,11 +120,11 @@ Wind Speed,6.78,4.56,0.1,25.3,0
 
 ## Requirements Checklist
 
-- [ ] Data loaded successfully from `data/beach_sensors.csv`
-- [ ] Initial inspection completed (shape, info, head, describe)
-- [ ] Missing values identified and counted
-- [ ] Basic visualizations created (at least 2 plots: distribution + time series)
-- [ ] All 3 required artifacts saved with exact filenames
+- [X] Data loaded successfully from `data/beach_sensors.csv`
+- [X] Initial inspection completed (shape, info, head, describe)
+- [X] Missing values identified and counted
+- [X] Basic visualizations created (at least 2 plots: distribution + time series)
+- [X] All 3 required artifacts saved with exact filenames
 
 ---
 
@@ -172,13 +172,12 @@ Wind Speed,6.78,4.56,0.1,25.3,0
 ## Checkpoint
 
 After Q1, you should have:
-- [ ] Data loaded successfully
-- [ ] Basic statistics calculated
-- [ ] Initial visualizations created (2+ plots)
-- [ ] Data quality issues identified
-- [ ] All 3 artifacts saved: `q1_data_info.txt`, `q1_exploration.csv`, `q1_visualizations.png`
+- [X] Data loaded successfully
+- [X] Basic statistics calculated
+- [X] Initial visualizations created (2+ plots)
+- [X] Data quality issues identified
+- [X] All 3 artifacts saved: `q1_data_info.txt`, `q1_exploration.csv`, `q1_visualizations.png`
 
 ---
 
 **Next:** Continue to `q2_data_cleaning.md` for Data Cleaning.
-
