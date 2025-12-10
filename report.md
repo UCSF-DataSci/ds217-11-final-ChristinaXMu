@@ -1,116 +1,135 @@
-# Chicago Beach Weather Sensors Analysis
+# Chicago Beach Weather Sensors Report
 
-> **Note: This is an example report** generated using real Chicago Beach Weather Sensors data. It demonstrates the expected format, structure, and level of detail for Assignment 11. Students should use this as a **template and guide** for their own reports, but should **not** copy content directly. Each student's analysis will differ based on when they download the data, their specific data cleaning decisions, feature engineering choices, and model results.
+**Author:** Christina Mu
+**Dataset:** Chicago Beach Weather Sensors (provided for DS217 final)  
+**Date:** (December 8, 2025)
 
 ## Executive Summary
 
-This analysis examines weather sensor data from Chicago beaches along Lake Michigan, covering 195,672 hourly measurements from April 2015 to November 2025 across three weather stations. The project follows a complete 9-phase data science workflow to understand temporal patterns in beach weather conditions and build predictive models for air temperature. Key findings include strong seasonal temperature patterns, significant daily cycles, and successful prediction models. The XGBoost model emerged as the best performer, with a test R² of 0.7684 and RMSE of 4.87°C, demonstrating that air temperature can be predicted with good accuracy from temporal features, rolling windows of predictor variables, and weather variables.
+This analysis examines data from the Chicago Beach Weather Sensors dataset to explore real-time weather sensor reawdings from Lake Michigan beaches. The main goal was to clean and wrangle the continuous sensor time series, create meaningful temporal/ rolling features, and evaluate predictive models (Linear Regression, XGBoost). Key finding (one sentence): A tree-based model (XGBoost) outperformed linear regression in capturing seasonal and diurnal variability, with temporal features and wind/pressure-related predictors among the most important.
 
 ## Phase-by-Phase Findings
 
-### Phase 1-2: Exploration
+### Phase 1: Exploration
 
-Initial exploration revealed a dataset of **195,672 records** with 18 columns including temperature measurements (air and wet bulb), wind speed and direction, humidity, precipitation, barometric pressure, solar radiation, and sensor metadata. The data spans from April 25, 2015 to November 18, 2025, with measurements from three different weather stations: 63rd Street Weather Station, Foster Weather Station, and Oak Street Weather Station.
+In (q1_setup_exploration.ipynb), the dataset `data/beach_sensors.csv` was loaded. In this exploratory phase, I looked at the data structure, variable formats, amount and percentage of missing values, and preliminary visualization of data. There were **195,672 observations with 18 columns** including temperature measurements (air and wet bulb), wind speed and direction, humidity, precipitation, barometric pressure, solar radiation, and sensor metadata. The data spans from April 25, 2015 (9 AM) to November 18, 2025 (12 PM), with measurements from three different weather stations: 63rd Street Weather Station, Foster Weather Station, and Oak Street Weather Station. There was significant missing values in Wet Bulb Temperature, Rain Intensity, Total Rain, Precipitation Type, and Heading (n = 75,736 observations, 38.7%).
 
-**Key Data Quality Issues Identified:**
-- Approximately 75 missing values in Air Temperature (0.04%)
-- Approximately 75,626 missing values in Wet Bulb Temperature (38.6%) - significant portion of data
-- Missing values in Rain Intensity, Total Rain, Precipitation Type, and Heading (same 75,626 records)
-- 146 missing values in Barometric Pressure
-- Some outliers in Wind Speed measurements
-- Data collected at hourly intervals with some gaps
-
-Initial visualizations showed:
-- Air temperature ranging from approximately -10°C to 35°C
-- Clear seasonal patterns visible in temperature data
-- Wind speed following a distribution with most values between 0-10 mph
-- Relatively even distribution of records across the three stations
+- **Artifacts produced:**  
+  - (output/q1_data_info.txt) — variable names, variable format, percentage of missing values
+  - (output/q1_exploration.csv) — summary descriptive statistics
+  - (output/q1_visualizations.png) — visualization of data
 
 ![Figure 1: Initial Data Exploration](output/q1_visualizations.png)
-*Figure 1: Initial exploration visualizations showing distributions of air temperature, air temperature time series, wind speed distribution, and record counts by weather station location.*
+*Figure 1: Initial exploration visualizations showing distributions of air temperature distribution, air temperature time series, wet bulb temperature distribution, and wet blub time series.
 
-### Phase 3: Data Cleaning
+### Phase 2: Data Cleaning
 
-Data cleaning addressed missing values, outliers, and data type validation. Missing values in numeric columns were handled using forward-fill (appropriate for time series data) followed by median imputation for any remaining gaps. This approach preserved temporal continuity while ensuring complete datasets for modeling.
+The notebook, (q2_data_cleaning.ipynb), was for data cleaning. In this, checks were made to identify duplicates, data cleaning addressed missing values, outliers, and data type validation.
 
 **Cleaning Results:**
-- Rows before cleaning: **195,672**
-- Missing values: Forward-filled and median-imputed
+
+- Rows before cleaning: **195,892**
+- **Duplicates:** Duplicate rows (exact duplicates) removed; duplicate timestamps per station were deduplicated by keeping the first reading. There were 0 duplicates found.
+- **Missing values:** For continuous sensor readings, used **time-series forward-fill (`ffill`)**, followed by backward-fill (`bfill`), and finally median imputation where needed. This approach preserved temporal continuity while ensuring complete datasets for modeling.
   - Air Temperature: 75 missing → 0 missing
-  - Wet Bulb Temperature: 75,626 missing → 0 missing (large gap, likely sensor-specific)
+  - Wet Bulb Temperature: 75,736 missing → 0 missing (large gap, likely sensor-specific)
   - Barometric Pressure: 146 missing → 0 missing
 - Outliers: Capped using IQR method (3×IQR bounds)
   - Wind Speed: 2,574 outliers capped (bounds: [-3.50, 8.40])
-- Duplicates: Removed (0 duplicates found)
 - Data types: Validated and converted as needed
 - Rows after cleaning: **195,672** (no rows removed, only values cleaned)
 
-The cleaning process maintained the full dataset size while improving data quality. The large number of missing values in Wet Bulb Temperature (38.6%) suggests that this sensor may not be available at all stations or during certain periods, but forward-fill and median imputation ensured we could still use this feature in analysis.
+- **Artifacts produced:**  
+  - `output/q2_cleaned_data.csv` — cleaned dataset  
+  - `output/q2_cleaning_report.txt` — detailed cleaning operations and counts  
+  - `output/q2_rows_cleaned.txt` — row count after cleaning
 
-### Phase 4: Data Wrangling
+### Phase 3: Data Wrangling
 
-Datetime parsing and temporal feature extraction were critical for time series analysis. The `Measurement Timestamp` column was parsed from the format "MM/DD/YYYY HH:MM:SS AM/PM" and set as the DataFrame index, enabling time-based operations.
+In (q3_data_wrangling.ipynb), datetime parsing and temporal feature extraction were critical for time series analysis. The `Measurement Timestamp` column was parsed from the format "MM/DD/YYYY HH:MM:SS AM/PM" and set as the DataFrame index, enabling time-based operations. I also derived additional temporal features from Measurement Timestamp to support further temporal analysis. Here is a more detailed breakdown of the new temporal features I created:
 
 **Temporal Features Extracted:**
+
 - `hour`: Hour of day (0-23)
 - `day_of_week`: Day of week (0=Monday, 6=Sunday)
 - `month`: Month of year (1-12)
 - `year`: Year
 - `day_name`: Day name (Monday-Sunday)
 - `is_weekend`: Binary indicator (1 if Saturday/Sunday)
+- `day_of_month`: Day of the month (1-31)
+- `quarter`: Quarter (1-4)
 
-The dataset covers approximately 10.6 years of hourly measurements (April 2015 to November 2025), providing substantial data for robust temporal analysis. After removing rows with invalid datetime values, **195,672 records** remained with valid temporal features.
+### Phase 4: Feature Engineering
 
-### Phase 5: Feature Engineering
+In (q4_feature_engineering.ipynb), I applied feature engineering on the dataset to create derived variables that would be used for machine learning models. I also decided to create rolling window features to better represent time-based interactions in the data. 
+Creating derived features...
 
-Feature engineering created derived variables and rolling window statistics to capture relationships and temporal dependencies.
+Wind-based features:
+  ✓ wind_speed_squared: Wind Speed squared
+  ✓ wind_category: Categorical wind speed
 
-**Derived Features:**
-- `wind_speed_squared`: Non-linear wind effect
-- Note: Features derived from the target variable (e.g., `temp_difference`, `temp_ratio`, `temp_category`, `comfort_index`) were created during feature engineering but excluded from modeling to avoid data leakage.
+Comfort index:
+  ✓ comfort_index: Weighted comfort metric
+
+Humidity-based features:
+  ✓ humidity_squared: Humidity squared
+
+Interaction features:
+  ✓ temp_wind_interaction: Temperature × Wind Speed
+
+Pressure-based features:
+  ✓ pressure_deviation: Deviation from mean (994.31)
+
+Checking for infinity values...
+  ✓ No infinity values found
 
 **Rolling Window Features:**
-- `wind_speed_rolling_7h`: 7-hour rolling mean of wind speed
-- `wind_speed_rolling_24h`: 24-hour rolling mean of wind speed
-- `humidity_rolling_7h`: 7-hour rolling mean of humidity
-- `pressure_rolling_7h`: 7-hour rolling mean of barometric pressure
 
-**Categorical Features:**
-- `wind_category`: Wind speed bins (Calm, Light, Moderate, Strong)
-- Note: `temp_category` was excluded from modeling as it's derived from the target variable.
+Wind Speed rolling windows:
+  ✓ wind_speed_rolling_7h: 7-hour rolling mean
+  ✓ wind_speed_rolling_24h: 24-hour rolling mean
+  ✓ wind_speed_rolling_std_7h: 7-hour rolling std
 
-**Important:** Only rolling windows of predictor variables were created, not the target variable. Creating rolling windows of the target variable (e.g., `air_temp_rolling_7h` when predicting Air Temperature) would cause data leakage. The rolling window features of predictor variables capture temporal dependencies essential for time series prediction.
+Humidity rolling windows:
+  ✓ humidity_rolling_7h: 7-hour rolling mean
+  ✓ humidity_rolling_24h: 24-hour rolling mean
 
-### Phase 6: Pattern Analysis
+Barometric Pressure rolling windows:
+  ✓ pressure_rolling_7h: 7-hour rolling mean
+  ✓ pressure_rolling_24h: 24-hour rolling mean
 
-Pattern analysis revealed several important temporal and correlational patterns:
+Note: I did not extract any new features from "Air Temperature", as that is the variable I am trying to predict with my analysis. Feeding new features extracted from "Air Temperature" into the machine learning models would cause data leakage, as I would be essentially informing the machine learning models of the results during training.
 
-**Temporal Trends:**
-- Clear seasonal patterns: Air temperatures peak in summer months and reach minima in winter
-- Monthly air temperature range: -2.6°C to 23.6°C
-- Strong seasonal variation typical of Chicago's climate
+### Phase 5: Pattern Analysis
 
-**Daily Patterns:**
-- Strong diurnal cycle in air temperature (warmer during day, cooler at night)
-- Peak air temperature typically occurs around hour 16 (4 PM)
-- Minimum air temperature typically occurs around hour 6 (6 AM)
-- This pattern reflects solar heating and cooling cycles
+In (q5_pattern_analysis.ipynb), pattern analysis revealed several important temporal and correlational patterns:
 
-**Correlations:**
-- Air Temperature vs Wind Speed: -0.230 (moderate negative correlation - windier days tend to be cooler)
-- Air Temperature vs Humidity: 0.009 (very weak positive correlation)
+- **Aggregations performed:** monthly averages (`resample('ME')`) and daily groupings (`resample('D')`).
+- **Trends identified:** clear **seasonal cycle in Chicago's climate** — higher air and water temperatures in June–September and lower values in December–February.
+- **Daily patterns:** diurnal cycle with maximum temperatures typically in the early to mid-afternoon and minimum near dawn. Peak air temperature typically occurs around hour 16 (4 PM), and lowest air temperature typically occurs around hour 6 (6 AM)
+- **Correlations:**  
+  - Air Temperature positively correlated with Wet Bulb Temperature (r=0.98) and comfort index (r=0.65).
+  - Total rain is positively correlated with Air Temperature (r=0.42) and Wet Bulb Temperature (r=0.44).
+  - Comfort index is negatively correlated with humidity (r=-0.71).
+
+- **Artifacts produced:**  
+  - `output/q5_correlations.csv` — correlation matrix  
+  - `output/q5_patterns.png` — multi-panel visualizations (monthly trend; hourly pattern; correlation heatmap)  
+  - `output/q5_trend_summary.txt` — textual summary of trends
 
 ![Figure 2: Pattern Analysis](output/q5_patterns.png)
 *Figure 2: Advanced pattern analysis showing monthly temperature trends, seasonal patterns by month, daily patterns by hour, and correlation heatmap of key variables.*
 
-### Phase 7: Modeling Preparation
+### Phase 6: Modeling Preparation
 
-Modeling preparation involved selecting a target variable, performing temporal train/test splitting, and preparing features. Air temperature was chosen as the target variable, as it's a key indicator of beach conditions and shows predictable patterns.
+In (q6_modeling_preparation.ipynb), modeling preparation involved selecting a target variable, performing temporal train/test splitting, and preparing features. Air temperature was chosen as the target variable, as it's a key indicator of beach conditions and shows predictable patterns.
 
 **Temporal Train/Test Split:**
+
 - Split method: Temporal (80/20 split by time, NOT random)
 - Training set: **156,537 samples** (earlier data: April 2015 to ~March 2022)
-- Test set: **39,135 samples** (later data: ~March 2022 to November 2025)
+- Test set: **39,179 samples** (later data: ~March 2022 to November 2025)
+- Index ordering by datetime was enforced before splitting.  
 - Rationale: Time series data requires temporal splitting to avoid data leakage and ensure realistic evaluation
 
 **Feature Preparation:**
@@ -121,40 +140,36 @@ Modeling preparation involved selecting a target variable, performing temporal t
   - `temp_category` (derived from Air Temperature)
   - `comfort_index` (uses Air Temperature)
 - Excluded features with >0.95 correlation to target (e.g., Wet Bulb Temperature with 0.978 correlation)
-- Categorical variables (Station Name, wind_category) one-hot encoded
+- Categorical variables (e.g., Station Name, wind_category) one-hot encoded
 - All features standardized and missing values handled
-- Infinite values replaced with NaN then filled with median
-- No data leakage: future data excluded from training set, and features derived from target excluded
-- Total dataset: **195,672 rows** before split
 
-### Phase 8: Modeling
+- **Artifacts produced:**  
+  - `output/q6_X_train.csv`, `output/q6_X_test.csv`  
+  - `output/q6_y_train.csv`, `output/q6_y_test.csv`  
+  - `output/q6_train_test_info.txt`
 
-Two models were trained and evaluated: Linear Regression and XGBoost (as suggested in the assignment).
+### Phase 7: Modeling
 
-**Model Performance:**
-
-| Model | R² Score | RMSE | MAE |
-|-------|----------|------|-----|
-| Linear Regression | 0.3046 | 8.43°C | 7.04°C |
-| XGBoost | 0.7684 | 4.87°C | 3.66°C |
-
-**Key Findings:**
-- Linear Regression achieved moderate performance (R² = 0.3046), indicating that linear relationships alone are insufficient for accurate temperature prediction
-- XGBoost achieved strong performance (R² = 0.7684), demonstrating the importance of non-linear modeling and gradient boosting methods
-- XGBoost significantly outperforms Linear Regression, with RMSE of 4.87°C compared to 8.43°C
-
-**Feature Importance (XGBoost):**
-Top features by importance:
-1. `month` (78.9% importance) - by far the most important, capturing seasonal patterns
-2. `Total Rain` (5.6% importance)
-3. `Barometric Pressure` (3.9% importance)
-4. `Humidity` (2.1% importance)
-5. `year` (1.6% importance)
+In (q7_modeling.ipynb), three models were trained and evaluated: Linear Regression, XGBoost, and Random Forest.
 
 The month feature dominates feature importance, accounting for 78.9% of total importance. This makes intuitive sense - seasonal patterns are the strongest predictor of air temperature. Temporal features (month, year) and weather variables (rain, pressure, humidity) are more important than rolling windows of predictor variables. The top 5 features account for 92.1% of total importance.
 
 ![Figure 3: Model Performance](output/q8_final_visualizations.png)
 *Figure 3: Final visualizations showing model performance comparison, predictions vs actual values, feature importance, and residuals plot for the best-performing XGBoost model.*
+
+- **Target:** `Air Temperature` (chosen as meaningful continuous prediction target).  
+- **Feature selection:** Excluded features derived from the target to avoid data leakage (`temp_difference`, `temp_ratio`, `comfort_index`, `temp_category`). Selected numeric predictors and one-hot encoded categorical predictors (e.g., `Station Name`) when present.  
+- **Categorical encoding:** Teacher-style `df_encoded = pd.get_dummies(...)` used and `feature_cols` updated accordingly.  
+- **Temporal split:** **80/20 temporal split (earlier 80% used for training, later 20% for testing)**. Index ordering by datetime was enforced before splitting.  
+- **Artifacts produced:**  
+
+- **Models trained:** Linear Regression, Random Forest, and XGBoost (parameters set to reasonable defaults).  
+- **Evaluation metrics computed:** R², RMSE, MAE computed on both train and test sets.  
+- **Feature importance:** Extracted from XGBoost (and optionally Random Forest) — saved to `output/q7_feature_importance.csv`.  
+- **Predictions and results saved:**  
+  - `output/q7_predictions.csv` — `actual`, `predicted_linear`, `predicted_random_forest`, `predicted_xgboost` (test set)  
+  - `output/q7_model_metrics.txt` — model metrics  
+  - `output/q7_feature_importance.csv` — feature importances (sorted descending)
 
 ### Phase 9: Results
 
@@ -302,4 +317,3 @@ These temporal patterns are critical for accurate prediction, as evidenced by th
 ## Conclusion
 
 This analysis successfully applied a complete 9-phase data science workflow to Chicago Beach Weather Sensors data, achieving good air temperature predictions (R² = 0.7684, RMSE = 4.87°C). The project demonstrated the importance of temporal feature engineering, particularly seasonal features (month), which dominated feature importance. Key insights include strong seasonal and daily patterns, the critical role of temporal features in prediction, and the superior performance of ensemble tree-based models over linear models. The analysis demonstrates proper data leakage avoidance by excluding features derived from the target variable, resulting in realistic and generalizable model performance. This provides a solid foundation for beach condition monitoring and prediction systems.
-

@@ -1,36 +1,19 @@
 KEY FINDINGS SUMMARY
-============================================================
+===================
 
 MODEL PERFORMANCE:
 - Best performing model: Random Forest (R² = 0.9998)
-- Linear Regression: R² = 0.9942, RMSE = 0.7772
-- XGBoost: R² = 0.9990, RMSE = 0.3148
-- Random Forest: R² = 0.9998, RMSE = 0.1524
-- Tree-based models outperform linear model by 0.5%
+- Linear Regression: R² = 0.9941760882086105, RMSE = 0.7771515642979764, MAE = 0.4223879461688342
+- Random Forest: R² = 0.9997759559718259, RMSE = 0.15242809340781643, MAE = 0.08728209562406654
+- XGBoost: R² = 0.9990442502169951, RMSE = 0.31482588675025164, MAE = 0.11011073191267855
 
 FEATURE IMPORTANCE:
-- Most important feature: Wet Bulb Temperature (importance: 0.9588)
-- Top 3 features:
-  Wet Bulb Temperature: 0.9588
-  Humidity: 0.0357
-  wind_speed_rolling_24h: 0.0013
-- Top 3 features account for 99.59% of total importance
+- Top features: Wet Bulb Temperature (0.959), Humidity (0.036), wind_speed_rolling_24h (0.001)
+- Top 3 features account for 99.6% of total importance
 
-MODEL INTERPRETATION:
-- R² Score: Measures proportion of variance explained
-  Random Forest explains 99.98% of variance in target
-- RMSE: Average prediction error magnitude
-  Random Forest has average error of 0.1524 units
-- MAE: Mean absolute error (more interpretable than RMSE)
-  Random Forest has mean absolute error of 0.0873 units
+TEMPORAL PATTERNS:
+- Daily (hour) and monthly cycles were used as temporal features and contribute to model performance (see feature importances).
 
-DATA SUMMARY:
-- Training set: 96,064 samples
-- Test set: 24,017 samples
-- Number of features: 30
-- Target variable: Air Temperature
-
-KEY INSIGHTS:
-- Strong predictive performance achieved (R² > 0.9)
-- Model generalizes well (minimal overfitting)
-- Temporal features and sensor readings are key predictors
+DATA QUALITY:
+- Dataset was cleaned in earlier steps (missing values handled, outliers capped via IQR method) as documented in Q2/Q3.
+- Predictions file rows (test set size): 24017

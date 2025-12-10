@@ -18,10 +18,10 @@ Number of Features: 30
 Target Variable: Air Temperature
 
 Features Excluded (to prevent data leakage):
+  - comfort_index
+  - Air Temperature
   - temp_category
   - temp_wind_interaction
-  - Air Temperature
-  - comfort_index
 
 Features Included:
   - Wet Bulb Temperature

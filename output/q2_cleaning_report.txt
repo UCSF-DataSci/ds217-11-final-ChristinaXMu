@@ -33,7 +33,55 @@ Missing Data Handling:
   Result: All missing values filled
 
 Outlier Handling:
-- No outliers detected
+- Rain Intensity: Detected 6851 outliers using IQR method (3×IQR)
+  Method: Capped at IQR bounds (3×IQR)
+  Bounds: [0.00, 0.00]
+  Result: 6851 values capped
+
+- Interval Rain: Detected 15798 outliers using IQR method (3×IQR)
+  Method: Capped at IQR bounds (3×IQR)
+  Bounds: [0.00, 0.00]
+  Result: 15798 values capped
+
+- Total Rain: Detected 4569 outliers using IQR method (3×IQR)
+  Method: Capped at IQR bounds (3×IQR)
+  Bounds: [-497.30, 699.70]
+  Result: 4569 values capped
+
+- Precipitation Type: Detected 13630 outliers using IQR method (3×IQR)
+  Method: Capped at IQR bounds (3×IQR)
+  Bounds: [0.00, 0.00]
+  Result: 13630 values capped
+
+- Wind Speed: Detected 2574 outliers using IQR method (3×IQR)
+  Method: Capped at IQR bounds (3×IQR)
+  Bounds: [-3.50, 8.40]
+  Result: 2574 values capped
+
+- Maximum Wind Speed: Detected 220 outliers using IQR method (3×IQR)
+  Method: Capped at IQR bounds (3×IQR)
+  Bounds: [-10.80, 17.20]
+  Result: 220 values capped
+
+- Barometric Pressure: Detected 106 outliers using IQR method (3×IQR)
+  Method: Capped at IQR bounds (3×IQR)
+  Bounds: [965.00, 1023.80]
+  Result: 106 values capped
+
+- Solar Radiation: Detected 17195 outliers using IQR method (3×IQR)
+  Method: Capped at IQR bounds (3×IQR)
+  Bounds: [-393.00, 524.00]
+  Result: 17195 values capped
+
+- Heading: Detected 41217 outliers using IQR method (3×IQR)
+  Method: Capped at IQR bounds (3×IQR)
+  Bounds: [333.00, 375.00]
+  Result: 41217 values capped
+
+- Battery Life: Detected 6 outliers using IQR method (3×IQR)
+  Method: Capped at IQR bounds (3×IQR)
+  Bounds: [2.30, 24.70]
+  Result: 6 values capped
 
 Duplicates Removed: 0
 

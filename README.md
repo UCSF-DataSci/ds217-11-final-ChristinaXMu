@@ -1,5 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/FrNolGvZ)
-[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=21756016)
 # Final Exam: Chicago Beach Weather Sensors Analysis
 
 **Total: 100 points**  
@@ -418,13 +416,23 @@ Use this structure for your `report.md`:
 
 ## Visualizations
 
-![Figure 1: Time Series of Temperature](output/q1_temperature_timeseries.png)
-*Figure 1: Daily temperature readings show clear seasonal patterns with higher values in summer months...*
+> **Note:** All images referenced below are saved in the `output/` folder by the analysis scripts.
 
-![Figure 2: Model Performance Comparison](output/q7_model_comparison.png)
-*Figure 2: Random Forest outperforms Linear Regression with R² of 0.XX...*
+![Figure 1: Q1 — Distribution and short-time series of a representative numeric variable (e.g., Air Temperature / sample)](output/q1_visualizations.png)  
+**Figure 1:** Distribution (histogram) and short time series overview used in exploration (Q1). The left panel shows the distribution of a numeric variable; the right panel illustrates raw sensor readings over time (note early missing sections and occasional spikes).
 
-[Include at least 5 figures total with captions]
+![Figure 2: Q5 — Multi-panel patterns (monthly trend and hourly pattern)](output/q5_patterns.png)  
+**Figure 2:** Q5 multi-panel visualizations: monthly averages (trend), hourly pattern (diurnal cycle), correlation heatmap and monthly bar plots — used to identify seasonality and hourly cycles.
+
+![Figure 3: Q8 — Final summary visualizations (predictions vs actual, model comparison, feature importance, residuals)](output/q8_final_visualizations.png)  
+**Figure 3:** Final multi-panel figure combining model performance and diagnostics (predicted vs actual for each model, top feature importances, and residuals).
+
+![Figure 4: Q5 — Correlation heatmap (subset of numeric variables)](output/q5_patterns.png)  
+**Figure 4 (alternate view):** Correlation heatmap from Q5 showing relationships among core numeric predictors such as Air Temperature, Humidity, Wind Speed, Barometric Pressure.
+
+![Figure 5: Q8 — Residuals diagnostic (XGBoost or best model)](output/q8_final_visualizations.png)  
+**Figure 5 (alternate view):** Residuals vs predicted values used to diagnose heteroscedasticity, bias, and potential nonlinearity in model residuals.
+
 
 ## Model Results
 

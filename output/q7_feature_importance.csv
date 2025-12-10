@@ -1,31 +1,31 @@
 feature,importance
-Wet Bulb Temperature,0.9588252
-Humidity,0.03571738
-wind_speed_rolling_24h,0.001323908
-day_of_month,0.0008300083
-Solar Radiation,0.00073231367
-day_of_week,0.0006532219
-year,0.00033973827
-hour,0.00020907202
-pressure_rolling_24h,0.00019421511
-humidity_rolling_7h,0.00019024672
-humidity_rolling_24h,0.00017520362
-Barometric Pressure,0.00015926652
-pressure_rolling_7h,0.00012539697
-Wind Direction,0.00010835226
-wind_speed_rolling_7h,0.000103863174
-month,7.995415e-05
-Total Rain,7.399598e-05
-Interval Rain,3.7626334e-05
-Maximum Wind Speed,3.365503e-05
-Wind Speed,3.0058864e-05
-Heading,2.9781806e-05
-wind_speed_rolling_std_7h,1.5132654e-05
-Precipitation Type,6.831518e-06
-Battery Life,5.583277e-06
+Wet Bulb Temperature,0.95395076
+Humidity,0.04040802
+wind_speed_rolling_24h,0.0016611759
+day_of_month,0.0012196471
+Solar Radiation,0.00064508355
+humidity_rolling_24h,0.00032509072
+pressure_rolling_24h,0.00031298125
+hour,0.00031089137
+day_of_week,0.00023067958
+Barometric Pressure,0.00017389271
+Wind Direction,0.00011360904
+humidity_rolling_7h,8.740582e-05
+Maximum Wind Speed,8.573601e-05
+pressure_rolling_7h,8.537943e-05
+Wind Speed,5.555425e-05
+month,5.48511e-05
+wind_speed_rolling_std_7h,5.305324e-05
+year,4.612076e-05
+Total Rain,4.4326818e-05
+wind_speed_rolling_7h,4.181123e-05
+Heading,3.662243e-05
+Battery Life,2.1719752e-05
+Precipitation Type,2.133063e-05
+Interval Rain,1.0209446e-05
+Rain Intensity,4.023918e-06
 is_weekend,0.0
+quarter,0.0
 wind_speed_squared,0.0
 humidity_squared,0.0
 pressure_deviation,0.0
-Rain Intensity,0.0
-quarter,0.0
