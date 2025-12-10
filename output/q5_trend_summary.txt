@@ -18,16 +18,15 @@ DAILY PATTERNS:
 
 CORRELATIONS:
 Top positive correlations:
-  1. Air Temperature vs Wet Bulb Temperature: 0.981
-  2. Air Temperature vs comfort_index: 0.650
-  3. Wet Bulb Temperature vs comfort_index: 0.499
+  1. Air Temperature vs Comfort Index: 1.000
+  2. pressure_rolling_7h vs barometric_pressure_rolling_mean_7h: 0.992
+  3. Barometric Pressure vs pressure_rolling_7h: 0.991
 
 Top negative correlations:
-  1. Wet Bulb Temperature vs Wind Direction: -0.216
-  2. Wind Speed vs comfort_index: -0.303
-  3. Humidity vs comfort_index: -0.714
+  1. Wet Bulb Temperature vs Barometric Pressure: -0.268
+  2. Humidity vs solar_radiation_rolling_mean_7h: -0.270
+  3. Humidity vs Temperature Difference: -0.702
 
 KEY INSIGHTS:
 - Air Temperature peaks in summer months
 - Air Temperature peaks in afternoon hours
-- Strong positive correlation detected between key variables
