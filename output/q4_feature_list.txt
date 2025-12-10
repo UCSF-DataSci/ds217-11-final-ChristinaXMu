@@ -1,16 +1,11 @@
-wind_speed_squared
-wind_category
-comfort_index
-humidity_squared
-temp_wind_interaction
-pressure_deviation
-wind_speed_rolling_7h
-wind_speed_rolling_24h
-wind_speed_rolling_std_7h
-humidity_rolling_7h
-humidity_rolling_24h
+Temperature Difference
+Temp Ratio
+Wind Speed Squared
+Air Temperature (F)
+Comfort Index
+Air Temperature Categories
+Wind Speed Categories
 pressure_rolling_7h
-pressure_rolling_24h
-temp_category
-time_of_day
-season
+barometric_pressure_rolling_mean_7h
+solar_radiation_rolling_mean_7h
+total_rain_rolling_mean_24h
