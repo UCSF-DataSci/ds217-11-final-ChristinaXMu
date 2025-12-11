@@ -2,18 +2,18 @@ KEY FINDINGS SUMMARY
 ===================
 
 MODEL PERFORMANCE:
-- Best performing model: Random Forest (R² = 0.9998)
-- Linear Regression: R² = 0.9941760882086105, RMSE = 0.7771515642979764, MAE = 0.4223879461688342
-- Random Forest: R² = 0.9997759559718259, RMSE = 0.15242809340781643, MAE = 0.08728209562406654
-- XGBoost: R² = 0.9990442502169951, RMSE = 0.31482588675025164, MAE = 0.11011073191267855
+- Best performing model: Linear Regression (R² = 1.0000)
+- Linear Regression: R² = 1.0, RMSE = 6.98726791629779e-12, MAE = 2.28258848706941e-12
+- Random Forest: R² = NaN, RMSE = NaN, MAE = NaN
+- XGBoost: R² = 0.9994301297366027, RMSE = 0.24221861751921553, MAE = 0.13270806841788674
 
 FEATURE IMPORTANCE:
-- Top features: Wet Bulb Temperature (0.959), Humidity (0.036), wind_speed_rolling_24h (0.001)
-- Top 3 features account for 99.6% of total importance
+- Top features: temp_category_Cool (0.454), Wet Bulb Temperature (0.326), temp_wind_interaction (0.138)
+- Top 3 features account for 91.8% of total importance
 
 TEMPORAL PATTERNS:
 - Daily (hour) and monthly cycles were used as temporal features and contribute to model performance (see feature importances).
 
 DATA QUALITY:
 - Dataset was cleaned in earlier steps (missing values handled, outliers capped via IQR method) as documented in Q2/Q3.
-- Predictions file rows (test set size): 24017
+- Predictions file rows (test set size): 19070

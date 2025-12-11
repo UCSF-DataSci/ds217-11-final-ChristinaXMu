@@ -1,47 +1,48 @@
 TRAIN/TEST SPLIT INFORMATION
-============================================================
+==========================
 
 Split Method: Temporal (80/20 split by time)
-Why temporal split? Time series has temporal dependencies.
-Random split would cause data leakage.
 
-Training Set Size: 96,064 samples
-Test Set Size: 24,017 samples
+Training Set Size: 156713 samples
+Test Set Size: 39179 samples
 
-Training Date Range: 2015-04-25 09:00:00 to 2022-11-30 20:00:00
-Training Duration: 2776 days
+Training Date Range: 2015-04-25 09:00:00 to 2023-06-28 18:00:00
+Test Date Range: 2023-06-28 18:00:00 to 2025-11-24 12:00:00
 
-Test Date Range: 2022-11-30 21:00:00 to 2025-11-24 12:00:00
-Test Duration: 1089 days
-
-Number of Features: 30
+Number of Features: 33
 Target Variable: Air Temperature
 
-Features Excluded (to prevent data leakage):
-  - comfort_index
-  - Air Temperature
-  - temp_category
-  - temp_wind_interaction
-
-Features Included:
-  - Wet Bulb Temperature
-  - Humidity
-  - Rain Intensity
-  - Interval Rain
-  - Total Rain
-  - Precipitation Type
-  - Wind Direction
-  - Wind Speed
-  - Maximum Wind Speed
-  - Barometric Pressure
-  - Solar Radiation
-  - Heading
-  - Battery Life
-  - hour
-  - day_of_week
-  - month
-  - year
-  - is_weekend
-  - day_of_month
-  - quarter
-  ... and 10 more features
+Feature List:
+- Humidity
+- Rain Intensity
+- Interval Rain
+- Total Rain
+- Precipitation Type
+- Wind Direction
+- Wind Speed
+- Maximum Wind Speed
+- Barometric Pressure
+- Solar Radiation
+- Heading
+- Battery Life
+- hour
+- day_of_week
+- month
+- year
+- is_weekend
+- day_of_month
+- quarter
+- Wind Speed Squared
+- pressure_rolling_7h
+- barometric_pressure_rolling_mean_7h
+- solar_radiation_rolling_mean_7h
+- total_rain_rolling_mean_24h
+- Station Name_Foster Weather Station
+- Station Name_Oak Street Weather Station
+- day_name_Monday
+- day_name_Saturday
+- day_name_Sunday
+- day_name_Thursday
+- day_name_Tuesday
+- day_name_Wednesday
+- Wind Speed Categories_Very Slow

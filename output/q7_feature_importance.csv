@@ -1,31 +1,34 @@
 feature,importance
-Wet Bulb Temperature,0.95395076
-Humidity,0.04040802
-wind_speed_rolling_24h,0.0016611759
-day_of_month,0.0012196471
-Solar Radiation,0.00064508355
-humidity_rolling_24h,0.00032509072
-pressure_rolling_24h,0.00031298125
-hour,0.00031089137
-day_of_week,0.00023067958
-Barometric Pressure,0.00017389271
-Wind Direction,0.00011360904
-humidity_rolling_7h,8.740582e-05
-Maximum Wind Speed,8.573601e-05
-pressure_rolling_7h,8.537943e-05
-Wind Speed,5.555425e-05
-month,5.48511e-05
-wind_speed_rolling_std_7h,5.305324e-05
-year,4.612076e-05
-Total Rain,4.4326818e-05
-wind_speed_rolling_7h,4.181123e-05
-Heading,3.662243e-05
-Battery Life,2.1719752e-05
-Precipitation Type,2.133063e-05
-Interval Rain,1.0209446e-05
-Rain Intensity,4.023918e-06
-is_weekend,0.0
+month,0.3423883
+total_rain_rolling_mean_24h,0.20274134
+Station Name_Foster Weather Station,0.06701432
+Barometric Pressure,0.062453516
+Station Name_Oak Street Weather Station,0.048213653
+Battery Life,0.035461064
+solar_radiation_rolling_mean_7h,0.02933525
+pressure_rolling_7h,0.027299743
+Humidity,0.026528182
+Wind Direction,0.026104782
+day_of_month,0.021434883
+Solar Radiation,0.01991201
+year,0.016143726
+Wind Speed,0.0145102795
+Heading,0.013011726
+Total Rain,0.011258958
+hour,0.006981955
+barometric_pressure_rolling_mean_7h,0.0049677524
+day_name_Thursday,0.004614105
+day_of_week,0.0044248733
+day_name_Wednesday,0.0044174353
+Maximum Wind Speed,0.0041076425
+day_name_Tuesday,0.0037563564
+day_name_Saturday,0.0022103463
+Wind Speed Categories_Very Slow,0.0007078175
+Wind Speed Squared,0.0
+day_name_Monday,0.0
 quarter,0.0
-wind_speed_squared,0.0
-humidity_squared,0.0
-pressure_deviation,0.0
+day_name_Sunday,0.0
+Rain Intensity,0.0
+Precipitation Type,0.0
+Interval Rain,0.0
+is_weekend,0.0
