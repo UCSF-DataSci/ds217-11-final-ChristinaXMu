@@ -18,12 +18,12 @@ DAILY PATTERNS:
 
 CORRELATIONS:
 Top positive correlations:
-  1. Air Temperature vs Comfort Index: 1.000
-  2. pressure_rolling_7h vs barometric_pressure_rolling_mean_7h: 0.992
-  3. Barometric Pressure vs pressure_rolling_7h: 0.991
+  1. Solar Radiation vs solar_radiation_rolling_mean_7h: 0.591
+  2. Air Temperature vs Temperature Difference: 0.533
+  3. Air Temperature vs Total Rain: 0.443
 
 Top negative correlations:
-  1. Wet Bulb Temperature vs Barometric Pressure: -0.268
+  1. Air Temperature vs pressure_rolling_7h: -0.241
   2. Humidity vs solar_radiation_rolling_mean_7h: -0.270
   3. Humidity vs Temperature Difference: -0.702
 
